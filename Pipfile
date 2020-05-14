@@ -9,6 +9,7 @@ verify_ssl = true
 flask = "*"
 unipath = "*"
 pusher = "*"
+flask-restful = "*"
 
 [requires]
 python_version = "3.6"
