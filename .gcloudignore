@@ -1,0 +1,9 @@
+/Pipfile
+/Pipfile.lock
+.vscode
+.git
+.gitignore
+.idea
+/LICENSE
+/README.md
+start.sh

@@ -1,0 +1,4 @@
+runtime: python37
+service: default
+instance_class: F4
+

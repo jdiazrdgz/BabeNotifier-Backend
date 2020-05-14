@@ -1,5 +1,5 @@
 # start.sh
 
-export FLASK_APP=wsgi.py
+export FLASK_APP=main.py
 export FLASK_ENV=development
 flask run

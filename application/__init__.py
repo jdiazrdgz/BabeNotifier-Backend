@@ -6,7 +6,7 @@ from pusher import Pusher
 def create_app():
     """Construct the core application."""
     app = Flask(__name__)
-    app.config.from_object(DevelopmentConfig)
+    app.config.from_object(ProductionConfig)
 
     # configure pusher object
     pusher = Pusher(
