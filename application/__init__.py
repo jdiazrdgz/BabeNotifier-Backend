@@ -1,12 +1,13 @@
 from flask import Flask
-from .config.config import DevelopmentConfig, ProductionConfig
+from .config.DevelopmentConfig import DevelopmentConfig
+from .config.ProductionConfig import ProductionConfig
 from pusher import Pusher
 
 
 def create_app():
     """Construct the core application."""
     app = Flask(__name__)
-    app.config.from_object(ProductionConfig)
+    app.config.from_object(DevelopmentConfig)
 
     # configure pusher object
     pusher = Pusher(
