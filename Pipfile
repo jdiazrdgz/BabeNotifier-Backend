@@ -11,6 +11,7 @@ unipath = "*"
 pusher = "*"
 flask-restful = "*"
 uwsgi = "*"
+google-cloud-firestore = "*"
 
 [requires]
 python_version = "3.6"

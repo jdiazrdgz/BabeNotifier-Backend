@@ -2,3 +2,7 @@
 .venv
 Pipfile.lock
 __pycache__/
+.gitsecret/keys/random_seed
+!*.secret
+application/config/DevelopmentConfig.py
+application/config/ProductionConfig.py
