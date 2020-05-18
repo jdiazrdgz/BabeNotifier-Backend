@@ -6,3 +6,4 @@ __pycache__/
 !*.secret
 application/config/DevelopmentConfig.py
 application/config/ProductionConfig.py
+application/babenotifier-b3a726e28ca9.json
