@@ -7,3 +7,5 @@ __pycache__/
 application/config/DevelopmentConfig.py
 application/config/ProductionConfig.py
 application/babenotifier-b3a726e28ca9.json
+application/config/babenotifier-b3a726e28ca9.json
+application/config/babenotifier-bcd20b44be05.json
