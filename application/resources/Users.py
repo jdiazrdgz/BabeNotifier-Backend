@@ -1,5 +1,6 @@
 from flask_restful import Resource
 from application.config.FirestoreConfig import get_connection
+import json
 
 db = get_connection()
 
@@ -8,12 +9,10 @@ class Users(Resource):
     # List all users in Users collection
 
     def get(self):
-        users = db.collection(u'users').stream()
-        for user in users:
-            print(user.to_dict())
+        users = db.collection('users').stream()
 
-        """return {
+        return {
             "success": True,
             "message": "Users",
-            "data": [x.json() for x in users]
-        }, 200"""
+            "data": [eval(json.dumps(user.to_dict())) for user in users]
+        }, 200
