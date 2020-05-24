@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 from application.config.FirestoreConfig import get_connection
 from application.functions.functions import get_firestore_document_with_id
+from application.documents.Users import get_user_by_email, create_user
 import json
 
 db = get_connection()
@@ -19,6 +20,39 @@ class User(Resource):
             "data": users_list
         }, 200
 
+    def post(self):
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument(
+            "name", type=str, required=True, help="This field cannot be blank."
+        )
+        parser.add_argument(
+            "email", type=str, required=True, help="This field cannot be blank."
+        )
+        parser.add_argument(
+            "password", type=str, required=True, help="This field cannot be blank."
+        )
+
+        data = parser.parse_args()
+        # Buscar si existe usuario con el correo dado, si es asi decir que ya existe, sino crearlo
+        user_document = get_user_by_email(data.email)
+        if user_document:
+            return {
+                "success": False,
+                "error-message": "Bad Request",
+                "error-description": "The user with that email already exists"
+            }, 400
+        else:
+            user_reference = create_user(name=data.name, email=data.email, password=data.password)
+            user_creation_metadata = user_reference[0]
+            user_document = user_reference[1].get()
+            user = user_document.to_dict()
+            print(user)
+            return {
+                "success": True,
+                "message": "User created successfuly",
+                "data": json.dumps(user)
+            }, 201
+
 
 class UserDetail(Resource):
     # Get user detail by ID
@@ -32,7 +66,6 @@ class UserDetail(Resource):
 
         user_document = db.collection('users').document(user_id).get()
         if not user_document.exists:
-            print(user_document, 'odio')
             return {
                 "success": True,
                 "error-message": "The resource doesn't exist",
